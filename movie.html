@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Movie Info</title>
+	<link rel="stylesheet" type="text/css" href="https://bootswatch.com/cyborg/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body onload="getMovie()">
+<nav class="navbar navbar-default">
+	<div class="container">
+		<div class="navbar-header">
+			<a href="index.html" title="Información peliculas" class="navbar-brand">Movie->Info</a>
+		</div>
+	</div>
+</nav>
+<div class="container">
+	<div id="movie" class="well"></div>
+</div>
+
+
+
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<!-- <script src="js/main.js"></script> -->
+<script src="js/codigo.js"></script>
+<script>
+		function getMovie(){
+	  		// imdbID "tt0008907"
+	  	  let movieId = sessionStorage.getItem('movieId');
+	  	  let urlBuscar = "http://www.omdbapi.com/?i=" + movieId;
+
+	  	  axios.get(urlBuscar)
+	  	    .then((response) => {
+	  	      let movie = response.data;
+	  	    	console.log(movie);
+	  	      let output = `
+	  	        <div class="row">
+	  	           <div class="col-md-4"> 
+	  	              <img src="${movie.Poster}" class="thumbnail">
+	  	           </div>
+	  	           <div class="col-md-8">
+	  	           	<h2>${movie.Title}</h2>
+	  	           	<ul class="list-group">
+	  	           	 	<li class="list-group-item"><strong>Genre:</strong> ${movie.Genre}</li>
+	  	           	 	<li class="list-group-item"><strong>Released:</strong> ${movie.Released}</li>
+	  	           	 	<li class="list-group-item"><strong>Year:</strong> ${movie.Year}</li>
+	  	           	 	<li class="list-group-item"><strong>Rated:</strong> ${movie.Rated}</li>
+	  	           	 	<li class="list-group-item"><strong>imdbRating:</strong> ${movie.imdbRating}</li>
+	  	           	 	<li class="list-group-item"><strong>Director:</strong> ${movie.Director}</li>
+	  	           	 	<li class="list-group-item"><strong>Writer:</strong> ${movie.Writer}</li>
+	  	           	 	<li class="list-group-item"><strong>Actors:</strong> ${movie.Actors}</li>
+	  	           	 	<li class="list-group-item"><strong>Language:</strong> ${movie.Language}</li>
+	  	           	 	<li class="list-group-item"><strong>Awards:</strong> ${movie.Awards}</li>
+	  	           	 	<li class="list-group-item"><strong>Type:</strong> ${movie.Type}</li>
+	  	           	 </ul> 
+	  	           </div>
+	  	        </div>
+	  	        <div class="row">
+					<div class="well">
+						<h3>Plot</h3>
+						${movie.Plot}
+						<hr>
+						<a href="http://imdb.com/title/${movie.imdbID}" target="_blank" class="btn btn-primary">Ver en IMDB</a>
+						<a href="index.html" target="_blank" class="btn btn-default">Atras</a>
+					</div>
+	  	        </div>
+	  	      `;
+	  	    $('#movie').html(output); 
+
+	  	    })
+	  	    .catch((err) => {
+	  	      console.log(err);
+	  	    });  	  
+	  	} 
+</script>
+</body>
+</html>

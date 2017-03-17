@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Movie Info</title>
+	<link rel="stylesheet" type="text/css" href="https://bootswatch.com/cyborg/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+	<div class="container">
+		<div class="navbar-header">
+			<a href="index.html" title="info pelis" class="navbar-brand">Movie->Info</a>
+		</div>
+	</div>
+</nav>
+<div class="container">
+	<div class="jumbotron">
+	  <h3>Busca tu película</h3>
+	  <form action="" id="searchForm">
+	  	<input type="text" id="searchText" class="form-control" name="searchText" placeholder="Buscar pelicula...">
+	  </form>	  
+	</div>
+</div>
+<div class="container">
+	<div id="movies" class="row"></div>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<!-- <script src="js/main.js"></script> -->
+<script src="js/codigo.js"></script>
+<script>
+		function buscarPeli (idPeli){
+	  	  sessionStorage.setItem('movieId', idPeli);
+	  	  window.location = 'movie.html';
+	  	  return false;
+	  	}
+</script>
+</body>
+</html>
